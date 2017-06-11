@@ -7,7 +7,7 @@ while getopts "i:s:D:" OPTION
 do
 	case $OPTION in
 		i)
-			input_id=$OPTARGinput_id
+			input_id=$OPTARG
 			echo "using input id ${input_id}"
 			;;
 		s)
