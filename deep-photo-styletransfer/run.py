@@ -6,13 +6,17 @@ import datetime
 ################ VARIABLES TO MODIFY ################
 
 # nested list of id. [input_id, style_id, output_id, num_iter, f_radius, f_edge]
-test_cases = [[10, 10, 10.1, 1000, 15, 0.01], [10, 10, 10.2, 2000, 15, 0.01], [10, 10, 10.3, 1000, 15, 0.05], [10, 10, 10.4, 2000, 15, 0.05], [10, 10, 10.5, 1000, 50, 0.01], [10, 10, 10.6, 2000, 50, 0.01]]
-save_iter = 250
+#test_cases = [[10, 10, 10.3, 1000, 15, 0.05], [10, 10, 10.4, 2000, 15, 0.05], [10, 10, 10.5, 1000, 50, 0.01], [10, 10, 10.6, 2000, 50, 0.01]]
+test_cases = [[10, 10, 10.3, 10, 15, 0.05]]
+# N=neuralstyle, D=deepmatting, B=both
+test_type = ['B']
+save_iter = 5
+print_iter = 1
 gpu_id = 0
 # end the trial_folder dir with '/'
 trial_folder = 'trials/'
 # Chnage to True if images need to be imported from CMP or DPST database
-import_image = True
+import_image = False
 
 
 ################ SCRIPT RUNNING CODE STARTS HERE ################
@@ -21,10 +25,11 @@ def main():
     # logging
     file_name = 'trials/log.txt'
     log = open(file_name, 'a')
-    log.write('\n\n')
 
     # looping through all test cases
     for i in range(len(test_cases)):
+
+        log.write('\n\n')
 
         # defining vars for each case
         input_id, style_id, output_id  = test_cases[i][0], test_cases[i][1], test_cases[i][2]
@@ -39,15 +44,21 @@ def main():
         log_info(log, start_time, input_id, style_id, output_id, num_iter, f_radius, f_edge)
 
         # Command strings for running neuralstyle and deepmatting. this looks disgusting.
-        neuralstyle = 'th neuralstyle_seg.lua -index '+ str(output_id)+' -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter 1 -gpu '+str(gpu_id)+' -serial '+trial_folder+'results_tmp -backend cudnn -cudnn_autotune'
+        neuralstyle = 'th neuralstyle_seg.lua -index '+ str(output_id)+' -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter '+str(print_iter)+' -gpu '+str(gpu_id)+' -serial '+trial_folder+'results_tmp -backend cudnn -cudnn_autotune'
 
-        deepmatting = ' th deepmatting_seg.lua -index '+str(output_id)+' -init_image '+trial_folder+'results_tmp/out'+ str(output_id)+'\_t_1000.png -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter 1 -gpu '+str(gpu_id)+' -serial trials/results_final -f_radius '+str(f_radius)+' -f_edge '+str(f_edge)+' -backend cudnn -cudnn_autotune'
+        deepmatting = 'th deepmatting_seg.lua -index '+str(output_id)+' -laplacian '+str(input_id)+' -init_image '+trial_folder+'results_tmp/out'+ str(output_id)+'\_t_'+ str(num_iter) +'.png -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter 1 -gpu '+str(gpu_id)+' -serial trials/results_final -f_radius '+str(f_radius)+' -f_edge '+str(f_edge)+' -backend cudnn -cudnn_autotune'
 
         # running neuralstyle and recording time spent
-        run_neuralstyle(neuralstyle, input_id, log, start_time)
+        if ((test_type[i] == 'B') or (test_type[i] == 'N')):
+            run_neuralstyle(neuralstyle, input_id, log, start_time)
+        neuralstyle_time = time.time()
+        log.write("neuralstyle-time: " + str(humanize_time(neuralstyle_time - start_time)) + '\n')
 
         # running deepmatting and recording time spent
-        run_deepmatting(deepmatting, input_id, log, start_time)
+        if ((test_type[i] == 'B') or (test_type[i] == 'D')):
+            run_deepmatting(deepmatting, input_id, log, start_time)
+        deepmatting_time = time.time()
+        log.write("deepmatting-time: " + str(humanize_time(deepmatting_time - neuralstyle_time)) + '\n')
 
     log.close()
 
@@ -105,23 +116,17 @@ def run_neuralstyle(neuralstyle, input_id, log, start_time):
         log.write("neuralstyle successful\n")
         print("\n Completed neuralstyle for input_id" + str(input_id))
 
-    neuralstyle_time = humanize_time(start_time - time.time())
-    log.write("neuralstyle-time: " + neuralstyle_time + '\n')
-
 def run_deepmatting(deepmatting, input_id, log, start_time):
     # running deepmatting command
     print("\n Running deepmatting for input_id" + str(input_id) + "...")
     cmd_return = os.system(deepmatting)
     if (cmd_return != 0):
-        log.write("neuralstyle failed")
+        log.write("deepmatting failed")
         print("\n Something went wrong in deepmatting. All hopes are lost!!! GOODBYE!")
         quit()
     else:
         print("Completed deepmatting for input_id" + str(input_id))
-        log.write("neuralstyle successful\n")
-
-    deepmatting = humanize_time(neuralstyle_time - time.time())
-    log.write("deepmatting-time: " + neuralstyle_time + '\n')
+        log.write("deepmatting successful\n")
 
 def log_info(log, start_time, input_id, style_id, output_id, num_iter, f_radius, f_edge):
     # logging the initial information

@@ -20,6 +20,7 @@ cmd:option('-style_seg_idxs', '', 'Style seg idxs')
 cmd:option('-content_seg', '', 'Content segmentation')
 cmd:option('-content_seg_idxs', '', 'Content seg idxs')
 cmd:option('-init_image', 'examples/inputs/init.jpg', 'Initial image')
+cmd:option('-laplacian', 1001)
 
 cmd:option('-gpu', 0, 'Zero-indexed ID of the GPU to use; for CPU mode set -gpu = -1')
 
@@ -78,6 +79,7 @@ local function main(params)
   local c, h, w = content_image:size(1), content_image:size(2), content_image:size(3)
   local _, h2, w2 = style_image:size(1), style_image:size(2), style_image:size(3)
   local index = params.index
+  local laplacian = params.laplacian
 
   -- init: used for initialize the image
   local init_image = image.load(params.init_image, 3)
@@ -114,7 +116,7 @@ local function main(params)
   local cnn = loadcaffe.load(params.proto_file, params.model_file, params.backend):float():cuda()
 
   -- load matting laplacian
-  local CSR_fn = 'gen_laplacian/generated/Input_Laplacian_'..tostring(params.patch)..'x'..tostring(params.patch)..'_1e-7_CSR' .. tostring(index) .. '.mat'
+  local CSR_fn = 'gen_laplacian/generated/Input_Laplacian_'..tostring(params.patch)..'x'..tostring(params.patch)..'_1e-7_CSR' .. tostring(laplacian) .. '.mat'
   print('loading matting laplacian...', CSR_fn)
   local CSR = matio.load(CSR_fn).data.CSR:cuda()
 
