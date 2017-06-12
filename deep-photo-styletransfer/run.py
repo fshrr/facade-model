@@ -5,19 +5,19 @@ import datetime
 
 ################ VARIABLES TO MODIFY ################
 
-# nested list of id. [input_id, style_id, output_id, num_iter, f_radius, f_edge]
+# nested list of id. [input_id, style_id, output_id, num_iter, f_radius, f_edge, laplacian]
 # test_cases = [[10, 10, 10.5, 1000, 15, 0.05], [10, 10, 10.4, 2000, 15, 0.05], [10, 10, 10.5, 1000, 50, 0.01], [10, 10, 10.6, 2000, 50, 0.01]]
-test_cases = [[4, 4, 4.1, 1000, 15, 0.01]]
+test_cases = [[1048.1, 1049.1, 10481, 1000, 15, 0.01, 1048], [1056.0, 1057.0, 10560, 1000, 15, 0.01, 1056]]
 
 # N=neuralstyle, D=deepmatting, B=both
-test_type = ['B']
-save_iter = 5
+test_type = ['D', 'B']
+save_iter = 250
 print_iter = 1
 gpu_id = 0
 # end the trial_folder dir with '/'
 trial_folder = 'trials/'
 # Chnage to True if images need to be imported from CMP or DPST database
-import_image = True
+import_image = False
 
 
 ################ SCRIPT RUNNING CODE STARTS HERE ################
@@ -35,6 +35,7 @@ def main():
         # defining vars for each case
         input_id, style_id, output_id  = test_cases[i][0], test_cases[i][1], test_cases[i][2]
         num_iter, f_radius, f_edge  = test_cases[i][3], test_cases[i][4], test_cases[i][5]
+        laplacian = test_cases[i][6]
 
         # importing images using import_image.sh. NOT ON by default.
         if (import_image == True):
@@ -47,7 +48,7 @@ def main():
         # Command strings for running neuralstyle and deepmatting. this looks disgusting.
         neuralstyle = 'th neuralstyle_seg.lua -index '+ str(output_id)+' -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter '+str(print_iter)+' -gpu '+str(gpu_id)+' -serial '+trial_folder+'results_tmp -backend cudnn -cudnn_autotune'
 
-        deepmatting = 'th deepmatting_seg.lua -index '+str(output_id)+' -laplacian '+str(input_id)+' -init_image '+trial_folder+'results_tmp/out'+ str(output_id)+'\_t_'+ str(num_iter) +'.png -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter 1 -gpu '+str(gpu_id)+' -serial trials/results_final -f_radius '+str(f_radius)+' -f_edge '+str(f_edge)+' -backend cudnn -cudnn_autotune'
+        deepmatting = 'th deepmatting_seg.lua -index '+str(output_id)+' -laplacian '+str(laplacian)+' -init_image '+trial_folder+'results_tmp/out'+ str(output_id)+'_t_'+str(num_iter)+'.png -content_image '+trial_folder+'input/in'+str(input_id)+'.png -content_seg '+trial_folder+'input_seg/in'+str(input_id)+'.seg.png -style_image '+trial_folder+'style/tar'+str(style_id)+'.png -style_seg '+trial_folder+'style_seg/tar'+str(style_id)+'.seg.png -num_iterations '+str(num_iter)+' -save_iter '+str(save_iter)+' -print_iter 1 -gpu '+str(gpu_id)+' -serial trials/results_final -f_radius '+str(f_radius)+' -f_edge '+str(f_edge)+' -backend cudnn -cudnn_autotune'
 
         # running neuralstyle and recording time spent
         if ((test_type[i] == 'B') or (test_type[i] == 'N')):

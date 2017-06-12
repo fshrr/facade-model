@@ -79,3 +79,89 @@ neuralstyle successful
 neuralstyle-time: 00:13:59
 deepmatting successful
 deepmatting-time: 00:14:39
+
+
+2017-06-12 04:59:30output_id = 10480.1049
+input_id = 1048.0, style_id = 1049.0
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+neuralstyle-time: 00:00:34
+deepmatting failed
+
+2017-06-12 05:02:56output_id = 10480.0
+input_id = 1048.0, style_id = 1049.0
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+neuralstyle-time: 00:00:05
+deepmatting failed
+
+2017-06-12 05:03:28output_id = 1048.0
+input_id = 1048.0, style_id = 1049.0
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:13:53
+deepmatting failed
+
+2017-06-12 08:44:42output_id = 1048.0
+input_id = 1048.0, style_id = 1049.0
+num_iter = 5
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 08:45:13output_id = 1048.0
+input_id = 1048.0, style_id = 1049.0
+num_iter = 5
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 08:45:38output_id = 1048.0
+input_id = 1048.0, style_id = 1049.0
+num_iter = 5
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:00:10
+deepmatting failed
+
+2017-06-12 08:51:22output_id = 10480
+input_id = 1048.0, style_id = 1049.0
+num_iter = 5
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:00:10
+deepmatting failed
+
+2017-06-12 08:51:59output_id = 10480
+input_id = 1048.0, style_id = 1049.0
+num_iter = 5
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 08:52:42output_id = 10480
+input_id = 1048.0, style_id = 1049.0
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:13:54
+deepmatting successful
+deepmatting-time: 00:14:12
+
+
+2017-06-12 09:20:49output_id = 10481
+input_id = 1048.1, style_id = 1049.1
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+
+
+2017-06-12 10:32:57output_id = 10481
+input_id = 1048.1, style_id = 1049.1
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:13:54
+deepmatting failed
