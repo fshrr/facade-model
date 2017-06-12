@@ -1,0 +1,81 @@
+
+
+2017-06-12 01:18:29output_id = 1048.1049
+input_id = 1048, style_id = 1049
+num_iter = 1000
+f_radius = 7, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:23:23output_id = 1048.1049
+input_id = 1048, style_id = 1049
+num_iter = 1000
+f_radius = 7, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:25:01output_id = 1048.1049
+input_id = 1048, style_id = 1049
+num_iter = 1000
+f_radius = 7, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:25:34output_id = 10.3
+input_id = 10, style_id = 10
+num_iter = 1000
+f_radius = 15, f_edge = 0.05
+neuralstyle failed
+
+
+2017-06-12 01:28:05output_id = 1048.1049
+input_id = 1048, style_id = 1049
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:28:58output_id = 1048.1049
+input_id = 1048, style_id = 1049
+num_iter = 1000
+f_radius = 15, f_edge = 0.05
+neuralstyle failed
+neuralstyle-time: 00:00:12
+deepmatting failed
+
+2017-06-12 01:29:34output_id = 10.5
+input_id = 10, style_id = 10
+num_iter = 1000
+f_radius = 15, f_edge = 0.05
+neuralstyle failed
+
+
+2017-06-12 01:31:05output_id = 1048.1049
+input_id = 1048, style_id = 1049
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:34:58output_id = 4.1
+input_id = 4, style_id = 4
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:35:22output_id = 4.1
+input_id = 4, style_id = 4
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 01:47:16output_id = 4.1
+input_id = 4, style_id = 4
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:13:59
+deepmatting successful
+deepmatting-time: 00:14:39

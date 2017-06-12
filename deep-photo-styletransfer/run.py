@@ -6,8 +6,9 @@ import datetime
 ################ VARIABLES TO MODIFY ################
 
 # nested list of id. [input_id, style_id, output_id, num_iter, f_radius, f_edge]
-#test_cases = [[10, 10, 10.3, 1000, 15, 0.05], [10, 10, 10.4, 2000, 15, 0.05], [10, 10, 10.5, 1000, 50, 0.01], [10, 10, 10.6, 2000, 50, 0.01]]
-test_cases = [[10, 10, 10.3, 10, 15, 0.05]]
+# test_cases = [[10, 10, 10.5, 1000, 15, 0.05], [10, 10, 10.4, 2000, 15, 0.05], [10, 10, 10.5, 1000, 50, 0.01], [10, 10, 10.6, 2000, 50, 0.01]]
+test_cases = [[4, 4, 4.1, 1000, 15, 0.01]]
+
 # N=neuralstyle, D=deepmatting, B=both
 test_type = ['B']
 save_iter = 5
@@ -16,7 +17,7 @@ gpu_id = 0
 # end the trial_folder dir with '/'
 trial_folder = 'trials/'
 # Chnage to True if images need to be imported from CMP or DPST database
-import_image = False
+import_image = True
 
 
 ################ SCRIPT RUNNING CODE STARTS HERE ################

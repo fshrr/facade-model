@@ -74,7 +74,7 @@ local function main(params)
   content_seg = image.scale(content_seg, w, h, 'bilinear')
   local style_seg = image.load(params.style_seg, 3)
   style_seg = image.scale(style_seg, w2, h2, 'bilinear')
-  local color_codes = {'darkblue', 'blue', 'blue2', 'cyan', 'green', 'lightgreen', 'black', 'white', 'red', 'yellow', 'grey', 'lightblue', 'purple', 'cyangreen'}
+  local color_codes = {'darkblue', 'blue', 'blue2', 'cyan', 'green', 'lightgreen', 'black', 'white', 'red', 'yellow', 'grey', 'lightblue', 'purple', 'cyangreen', 'darkred', 'lightorange'}
   local color_content_masks, color_style_masks = {}, {}
   for j = 1, #color_codes do
     local content_mask_j = ExtractMask(content_seg, color_codes[j])
@@ -446,6 +446,14 @@ function ExtractMask(seg, color)
     mask = torch.cmul(torch.gt(seg[1], 0.33-0.1), torch.lt(seg[1], 0.33+0.1))
     mask:cmul(torch.lt(seg[2], 0.1))
     mask:cmul(torch.cmul(torch.gt(seg[3], 0.66-0.1), torch.lt(seg[3], 0.66+0.1)))
+  elseif color == 'darkred' then
+    mask = torch.cmul(torch.gt(seg[1], 0.66-0.1), torch.lt(seg[1], 0.66+0.1))
+    mask:cmul(torch.lt(seg[2], 0.1))
+    mask:cmul(torch.lt(seg[3], 0.1))
+  elseif color == 'lightorange' then
+    mask = torch.gt(seg[1], 1-0.1)
+    mask:cmul(torch.cmul(torch.gt(seg[2], 0.66-0.1), torch.lt(seg[2], 0.66+0.1)))
+    mask:cmul(torch.lt(seg[3], 0.1))
   else
     print('ExtractMask(): color not recognized, color = ', color)
   end
