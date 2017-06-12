@@ -2,7 +2,7 @@ addpath /home/work/Projects/workstudy/facade-model/deep-photo-styletransfer/gen_
 addpath /home/work/Projects/workstudy/facade-model/deep-photo-styletransfer/gen_laplacian/gaimc/
 
 # list for the id of input images
-id_list = [4]
+id_list = [1056]
 
 pkg load image
 

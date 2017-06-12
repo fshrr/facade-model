@@ -165,3 +165,46 @@ f_radius = 15, f_edge = 0.01
 neuralstyle successful
 neuralstyle-time: 00:13:54
 deepmatting failed
+
+2017-06-12 12:47:29output_id = 10481
+input_id = 1048.1, style_id = 1049.1
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle-time: 00:00:00
+deepmatting successful
+deepmatting-time: 00:14:14
+
+
+2017-06-12 13:01:44output_id = 10560
+input_id = 1056.0, style_id = 1057.0
+num_iter = 1000
+f_radius = 15, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:09:50
+deepmatting failed
+
+2017-06-12 13:29:48output_id = 10482
+input_id = 1048.0, style_id = 1049.0
+num_iter = 1000
+f_radius = 7, f_edge = 0.1
+neuralstyle-time: 00:00:00
+deepmatting failed
+
+2017-06-12 13:30:21output_id = 10482
+input_id = 1048.0, style_id = 1049.0
+num_iter = 1000
+f_radius = 7, f_edge = 0.1
+neuralstyle successful
+neuralstyle-time: 00:13:55
+deepmatting successful
+deepmatting-time: 00:14:10
+
+
+2017-06-12 13:58:26output_id = 10561
+input_id = 1056.0, style_id = 1057.0
+num_iter = 1000
+f_radius = 7, f_edge = 0.1
+neuralstyle successful
+neuralstyle-time: 00:09:46
+deepmatting successful
+deepmatting-time: 00:09:58

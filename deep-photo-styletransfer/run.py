@@ -7,10 +7,10 @@ import datetime
 
 # nested list of id. [input_id, style_id, output_id, num_iter, f_radius, f_edge, laplacian]
 # test_cases = [[10, 10, 10.5, 1000, 15, 0.05], [10, 10, 10.4, 2000, 15, 0.05], [10, 10, 10.5, 1000, 50, 0.01], [10, 10, 10.6, 2000, 50, 0.01]]
-test_cases = [[1048.1, 1049.1, 10481, 1000, 15, 0.01, 1048], [1056.0, 1057.0, 10560, 1000, 15, 0.01, 1056]]
+test_cases = [[1056.0, 1057.0, 10560, 1000, 7, 0.01, 1056]]
 
 # N=neuralstyle, D=deepmatting, B=both
-test_type = ['D', 'B']
+test_type = ['B', 'B']
 save_iter = 250
 print_iter = 1
 gpu_id = 0
