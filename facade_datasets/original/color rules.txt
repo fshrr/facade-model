@@ -1,0 +1,19 @@
+CMP_extended and CMP_facades:
+
+	windows: Yellow (255,255,0), Royal (0,85,255)
+
+etrims_ds8:
+
+	windows: DarkBlue (0,0,128)
+
+graz:
+	
+	windows: Red (255,0,0)
+
+labelmefacade:
+
+	windows: DarkBlue (0,0,128)
+
+parisartdeco:
+
+	windows: 3 (since .txt file)
