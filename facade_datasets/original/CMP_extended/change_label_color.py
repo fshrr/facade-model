@@ -31,7 +31,7 @@ for image in images:
     for x in range(width):
         for y in range(height):
             red, green, blue = picture.getpixel((x,y))
-            if (red == 255 and green == 255 and blue == 0) or (red == 0 and green == 85 and blue == 255):
+            if (red == 255 and green == 255 and blue == 0) or (red == 0 and green == 85 and blue == 255) or (red == 170 and green == 0 and blue == 0):
                 picture.putpixel( (x,y), (255,0,0))
             else:
                picture.putpixel( (x,y), new_color)
