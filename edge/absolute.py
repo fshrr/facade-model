@@ -15,20 +15,19 @@ new_dir = cwd + "/out"
 if not os.path.exists(new_dir):
     os.makedirs(new_dir)
 
+# Get images within the in folder
 images = os.listdir(input_dir)
 for file in images[:]:
     if not(file.endswith(".png")):
            images.remove(file)
 
 # Make output directory
-
-
 for image in images:
     new_image_dir = new_dir + "/" + image.split(".")[0]
     if not os.path.exists(new_image_dir):
         os.makedirs(new_image_dir)
 
-# Loop
+# Loop for every pixel, and givene a threshold, turn it black or white
 for image in images:
     picture = Image.open(input_dir + "/" + image)
     new_image_dir = new_dir + "/" + image.split(".")[0]

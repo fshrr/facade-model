@@ -24,13 +24,13 @@ for image in images:
     im = rgb2gray(io.imread(input_dir + "/" + image))
 
     #edges1 = feature.canny(im)
-    #edges2 = feature.canny(im, sigma=3)
+    edges2 = feature.canny(im, sigma=2)
     #edges3 = roberts(im)
     #edges4 = sobel(im)
     #edges5 = scharr(im)
-    edges6 = prewitt(im)
+    #edges6 = prewitt(im)
 
-    scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edges6)
+    scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edges2)
  
 """
 fig, (ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(nrows=1, ncols=6, figsize=(10,5),
