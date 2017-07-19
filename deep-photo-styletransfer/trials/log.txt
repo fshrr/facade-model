@@ -208,3 +208,20 @@ neuralstyle successful
 neuralstyle-time: 00:09:46
 deepmatting successful
 deepmatting-time: 00:09:58
+
+
+2017-06-12 13:41:56output_id = 10560
+input_id = 1056.0, style_id = 1057.0
+num_iter = 1000
+f_radius = 7, f_edge = 0.01
+neuralstyle failed
+
+
+2017-06-12 14:25:11output_id = 10560
+input_id = 1056.0, style_id = 1057.0
+num_iter = 1000
+f_radius = 7, f_edge = 0.01
+neuralstyle successful
+neuralstyle-time: 00:09:46
+deepmatting successful
+deepmatting-time: 00:09:59
