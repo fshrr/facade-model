@@ -4,6 +4,7 @@ import numpy as np
 import re
 import sys
 from collections import deque
+import time
 # Hyperparameters
 input_folder = os.getcwd() + "/in"
 points_folder = os.getcwd() + "/points"
@@ -41,7 +42,7 @@ def create_image_folders_in_out(in_dir, out_dir):
     # file list in cwd
     l = os.listdir(in_dir)
     for f in l:
-        if os.path.isdir(in_dir + "/" + f) and not os.path.exists(in_dir + "/" + f):
+        if os.path.isdir(in_dir + "/" + f) and not os.path.exists(out_dir + "/" + f):
             os.mkdir(out_dir + "/" + f)
 
 def floodfill(nest_list, selection_list, x, y):
@@ -89,28 +90,34 @@ def floodfill(nest_list, selection_list, x, y, min_ignore=0, max_ignore=255):
 
     while not queue.isEmpty(): # Check adjacent neighbor is valid or the filling color
         a, b = queue.dequeue()
-        selection_list[b][a] = 255
+        selection_list[b,a] = 255
         checklist_array[(a,b)] = 1
-        # left
-        print((a,b) in checklist_array)
-        if (a,b-1) in checklist_array and check_valid(a,b-1,nest_list, min_ignore=0, max_ignore=255):
+        # print((a,b) in checklist_array)
+        # Up
+        if (a,b-1) not in checklist_array and check_valid(a,b-1,nest_list, min_ignore=0, max_ignore=255):
             #print("1")
             queue.enqueue((a, b-1))
-        # right
-        if (a,b+1) in checklist_array and check_valid(a,b+1,nest_list, min_ignore=0, max_ignore=255):
+            checklist_array[(a,b-1)] = 1
+        # Down
+        if (a,b+1) not in checklist_array and check_valid(a,b+1,nest_list, min_ignore=0, max_ignore=255):
             #print("2")
             queue.enqueue((a, b+1))
-        # up
-        if (a+1,b) in checklist_array and check_valid(a+1,b,nest_list, min_ignore=0, max_ignore=255):
+            checklist_array[(a,b+1)] = 1
+        # Right
+        if (a+1,b) not in checklist_array and check_valid(a+1,b,nest_list, min_ignore=0, max_ignore=255):
             #print("3")
             queue.enqueue((a+1, b))
-        # down
-        if (a-1,b) in checklist_array and check_valid(a-1,b,nest_list, min_ignore=0, max_ignore=255):
+            checklist_array[(a+1,b)] = 1
+        # Left
+        if (a-1,b) not in checklist_array and check_valid(a-1,b,nest_list, min_ignore=0, max_ignore=255):
             #print("4")
             queue.enqueue((a-1, b))
-
+            checklist_array[(a-1,b)] = 1
+        
         print(str(a) + "," + str(b))
         print("The queue size is: " + str(queue.size()))
+       # time.sleep(5)
+       # print(selection_list)
 
 def check_valid(x, y, nest_list, min_ignore=0, max_ignore=255):
 
@@ -148,19 +155,27 @@ def import_points_for_image(text_filename, points_folder):
 
 def select_object(image_file, x, y, min_ignore=0, max_ignore=255):
     im_array = io.imread(image_file)
-    mask = np.zeros_like(im_array)
+    mask = np.zeros((im_array.shape[0], im_array.shape[1]), dtype=int)
     floodfill(im_array, mask, x, y, min_ignore=0, max_ignore=255)
     #print(np.nonzero(mask))
     return mask
 
 def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255):
     im_array = io.imread(image_file)
-    mask = np.zeros_like(im_array)
+    mask = np.zeros((im_array.shape[0], im_array.shape[1]), dtype=int)
     print(mask.shape)
     for points in points_list:
         # Note that the points are (y,x)
-        mask = mask + select_object(image_file, int(float(points[1])), int(float(points[0])), min_ignore=0, max_ignore=255)
+        
+        new_object =  select_object(image_file, int(float(points[1])), int(float(points[0])), min_ignore=0, max_ignore=255)
+        mask = mask + new_object
+        print ("new object")
+        print (new_object)
+        print ("maask here")
+        print(mask)
     #print(np.nonzero(mask))
+    mask[mask>1] = 255
+    print(mask)
     return mask
 
 def process_all_images(image_list, img_dir, output_dir, points_folder, min_ignore=0, max_ignore=255):
