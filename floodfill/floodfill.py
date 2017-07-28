@@ -197,7 +197,7 @@ def process_all_images(image_list, img_dir, output_dir, points_folder, min_ignor
         for folder_name in output_dir_list:
             if image_name.startswith(folder_name):
                 io.imsave(output_dir + "/" + folder_name + "/" + image_file, img_mask)
-                io.imsave(find_output_shapes_folder + "/" + folder_name + "/" + image_file, img_mask)
+                io.imsave(find_output_shapes_folder() + "/" + folder_name + "/" + image_file, img_mask)
     return dict_of_selection_masks
 
 def process_all_images_of_in_folder(input_dir, output_dir, points_folder, min_ignore=0, max_ignore=255):

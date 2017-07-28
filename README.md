@@ -1,10 +1,13 @@
-Color-based approach to modelling 2D images into 2D+Extrusions
+Window Segmentation and Polygonal Approximation
 
-Current issues with color as an indication of depth:
-- Not always indicating more/less depth as it could just indicate the color of an object
+Structure of Pipeline:
 
-Assumptions:
-- Assume that from this one point of view that color is representative of depth
-- If color is representative of depth from this point of view, there exists a mapping of color to the 2D image that produces the correct output.
+1. input_images -> edge detection and KITTI segmentation -> edge_images + segmentation_images
+2. segmentation_images -> blob detection on segmentation -> image_points
+3. edge_images + image_points -> floodfill + polygon approximation -> output_shapes
 
+Need:
 
+run_program.py to start Pipeline
+polygon approximation scripts
+python to .exe
