@@ -13,6 +13,8 @@ def return_input_folder_location():
     Return the input folder location. If "input_images" does not exist in the
     parent folder of the edge folder, then ask the user for an input folder.
     Else, return the input folder absolute path of the input_images folder.
+
+    @return the input_images path
     """
     os.chdir("..")
     input_dir = os.getcwd() + "/input_images"
@@ -29,7 +31,7 @@ def create_intermediate_folder():
     Create a intermediate folder in the current working directory if none
     exists and return it.
 
-    @return String
+    @return the intermediate directory path
     """
     cwd = os.getcwd()
     mid_dir = cwd + "/mid"
@@ -38,7 +40,12 @@ def create_intermediate_folder():
     return mid_dir
 
 def create_output_edge_image_folder(image_list, output_dir):
-    # Make output directory
+    """
+    Create image folders in the edge_images folder.
+
+    @params image_list a list of image names
+    @params output_dir the output directory
+    """
     new_image_dir = output_dir
     for image in image_list:
         new_image_dir = output_dir + "/" + image.split(".")[0]
@@ -46,6 +53,11 @@ def create_output_edge_image_folder(image_list, output_dir):
             os.mkdir(new_image_dir)
 
 def create_edge_images_folder():
+    """
+    Create the edge_images folder in the parent directory if not exists.
+
+    @return the path to edge_images
+    """
     cwd = os.getcwd()
     os.chdir("..")
     parent_folder = os.getcwd()

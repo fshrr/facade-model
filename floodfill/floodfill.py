@@ -8,7 +8,7 @@ import time
 
 class Queue:
     """
-    A queue.
+    A basic queue.
     """
     def __init__(self):
         self.items = []
@@ -37,6 +37,9 @@ def create_image_folders_in_out(in_dir, out_dir):
     """
     Assuming that the in_dir contains image directories of images, create the
     same folder in the out_dir.
+
+    @params in_dir the input directory with image directories
+    @params out_dir this output directory
     """
 
     # file list in cwd
@@ -56,6 +59,11 @@ def floodfill(nest_list, selection_list, x, y, min_ignore=0, max_ignore=255):
     If the specified min_ignore and max_ignore are not within
     those bounds, then it's automatically set as max being 255 and min as 0.
 
+    @params nest_list the ndarray that is the edge image input
+    @params selection_list the ndarray that is to be the mask for the object
+    @params x,y the x,y points of the object
+    @params min_ignore the minimum threshold of a "white pixel"
+    @params max_ignore the maximum threshold of a "white pixel"
     """
     # Base case
     # If current pixel is 1 "white"
@@ -105,6 +113,12 @@ def check_valid(x, y, nest_list, min_ignore=0, max_ignore=255):
     """
     Check if this is a valid x,y point that is within the range of acceptance
     (below the min_ignore but greater than 0.0).
+
+    @params nest_list the ndarray that is the edge image input
+    @params x,y the x,y points of the object
+    @params min_ignore the minimum threshold of a "white pixel"
+    @params max_ignore the maximum threshold of a "white pixel"
+    @return true if the pixel is not outside of the image size and not "white"
     """
     height, width = nest_list.shape
     if (x < width and y < height and x >= 0 and y >= 0) and 0.0 <= nest_list[y][x] <= min_ignore:
@@ -115,6 +129,8 @@ def check_valid(x, y, nest_list, min_ignore=0, max_ignore=255):
 def check_image(image_list):
     """
     Check if the image is a .png. If not, remove it from the image_list.
+
+    @params image_list a list of image file names
     """
     for image in image_list[:]:
         if image.split(".")[-1] != "png":
@@ -123,6 +139,9 @@ def check_image(image_list):
 def find_images(image_directory):
     """
     Return a list of .png image names in an image_directory.
+
+    @params image_directory the absolute path of an image directory
+    @return a list of image file names
     """
     im_list = os.listdir(image_directory)
     check_image(im_list)
@@ -131,6 +150,11 @@ def find_images(image_directory):
 def import_points_for_image(text_filename, points_folder):
     """
     Retrieve the points list from the points folder.
+
+    @params text_filename a points text file
+    @params points_folder the path to the points folder
+
+    @return a list of points for a given image
     """
     points_list = []
     points_folder_list = os.listdir(points_folder)
@@ -148,6 +172,13 @@ def select_object(image_file, x, y, min_ignore=0, max_ignore=255):
     """
     Selects one object in the image_file based on its x,y point by the floodfill
     algorithm. Return it as a mask.
+
+    @params image_file the path to an image
+    @params x,y the x,y coordinates of an object
+    @params min_ignore the minimum threshold of a "white pixel"
+    @params max_ignore the maximum threshold of a "white pixel"
+
+    @return an nd array of an object
     """
     im_array = io.imread(image_file)
     mask = np.zeros((im_array.shape[0], im_array.shape[1]), dtype=int)
@@ -159,6 +190,13 @@ def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255):
     """
     Selects every object in the image_file based on its points_list and sums
     it into one image. Return all object masks as one mask.
+
+    @params image_file the path to an image
+    @params points_list the points of an object in the image
+    @params min_ignore the minimum threshold of a "white pixel"
+    @params max_ignore the maximum threshold of a "white pixel"
+
+    @return the mask that contains all the objects in an image
     """
     im_array = io.imread(image_file)
     mask = np.zeros((im_array.shape[0], im_array.shape[1]), dtype=int)
@@ -182,6 +220,12 @@ def process_all_images(image_list, img_dir, output_dir, points_folder, min_ignor
     Processes all images from the image_list in img_dir. Saves the points in a points folder in the cwd
     and in ../image_points .
 
+    @params image_file the path to an image
+    @params img_dir the image directory path
+    @params output_dir the output directory path
+    @params points_folder the path of the points folder
+    @params min_ignore the minimum threshold of a "white pixel"
+    @params max_ignore the maximum threshold of a "white pixel"
     """
     dict_of_selection_masks = {}
 
@@ -202,7 +246,14 @@ def process_all_images(image_list, img_dir, output_dir, points_folder, min_ignor
 
 def process_all_images_of_in_folder(input_dir, output_dir, points_folder, min_ignore=0, max_ignore=255):
     """
-    Assumes that the in directory only contains folders.
+    Precondition: input_dir directory only contains folders.
+    Processes all images inside the input directory folder.
+
+    @params input_dir the input directory path
+    @params output_dir the output directory path
+    @params points_folder the path of the points folder
+    @params min_ignore the minimum threshold of a "white pixel"
+    @params max_ignore the maximum threshold of a "white pixel"
     """
     subdirs = os.listdir(input_dir)
     for folder_name in subdirs:
@@ -214,11 +265,17 @@ def save_all_images(directory, ndarray_dict):
     """
     Saves images given a directory and a dictionary of image file names to
     ndarray.
+
+    @params directory the directory that will contain the image folders
+    @params ndarray_dict the dictionary that contains all image file names
     """
     for ndarray in ndarray_dict.keys():
         io.imsave(directory + "/" + ndarray.split(".png")[0] + "/" + ndarray)
 
 def find_edge_images_folder():
+    """
+    Return the edge_images folder.
+    """
     cwd = os.getcwd()
     os.chdir("../edge_images")
     edge_images_folder = os.getcwd()
@@ -226,6 +283,9 @@ def find_edge_images_folder():
     return edge_images_folder
 
 def find_output_shapes_folder():
+    """
+    Return the output_shapes folder.
+    """
     cwd = os.getcwd()
     os.chdir("../output_shapes")
     output_shapes_folder = os.getcwd()
@@ -233,6 +293,9 @@ def find_output_shapes_folder():
     return output_shapes_folder
 
 def find_image_points_folder():
+    """
+    Return the image_points folder.
+    """
     cwd = os.getcwd()
     os.chdir("../image_points")
     image_points_folder = os.getcwd()

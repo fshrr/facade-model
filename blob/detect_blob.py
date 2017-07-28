@@ -40,6 +40,8 @@ def create_image_points_folder():
 def check_image(image_list):
     """
     Check if the image is a png. If not, remove it from the image_list.
+
+    @params image_list list of string image names
     """
     for image in image_list[:]:
         if image.split(".")[-1] != "png":
@@ -48,6 +50,9 @@ def check_image(image_list):
 def find_images(image_directory):
     """
     Return a list of image file names in a directory of images.
+
+    @params image_directory path to image directory
+    @return the list of image file names
     """
     im_list = os.listdir(image_directory)
     print(im_list)
@@ -60,6 +65,16 @@ def process_all_images(image_list, img_dir, output_dir, w_ratio=0.05, l_ratio=0.
     /out/locations, ../floodfill/points and ../image_points folders.
 
     NOTE THAT IMAGES with "_raw" WILL BE REMOVED!
+
+    @params image_list a list of image names
+    @params img_dir path to image directories
+    @params output_dir path to /out folder in cwd
+    @params w_ratio the ratio of the minimum window width to image width
+    @params l_ratio the ratio of the minimum window length to image length
+    @params dev the standard deviation of window size
+    @params thr the threshold at which a blob is detected
+
+    Please read the skimage blob_log function for details of the optional parameters.
     """
     image_points_folder = create_image_points_folder()
     for image_file in image_list:
@@ -104,7 +119,16 @@ def process_all_images(image_list, img_dir, output_dir, w_ratio=0.05, l_ratio=0.
 
 def process_all_images_of_in_folder(input_dir, output_dir, w_ratio=0.05, l_ratio=0.05, dev=0.25, thr=0.075):
     """
-    Assumes that the in directory only contains folders.
+    Processes all images of the input folder input_dir and outputs them in output_dir.
+    Precondition: input_dir only contains folders.
+
+    @params image_list a list of image names
+    @params img_dir path to image directories
+    @params output_dir path to /out folder in cwd
+    @params w_ratio the ratio of the minimum window width to image width
+    @params l_ratio the ratio of the minimum window length to image length
+    @params dev the standard deviation of window size
+    @params thr the threshold at which a blob is detected
     """
     subdirs = os.listdir(input_dir)
     for folder_name in subdirs:
@@ -117,6 +141,10 @@ def save_plot(blobs_list, image_file, image):
     """
     Saves images with circles around detected blob centers inside the
     /out/image folder of the current working directory.
+
+    @params blobs_list a list of blob points
+    @params image_file the image file name
+    @params image the image ndarray
     """
     colors = ['yellow', 'lime', 'red']
     titles = ['Laplacian of Gaussian', 'Difference of Gaussian',
@@ -127,8 +155,6 @@ def save_plot(blobs_list, image_file, image):
     fig, axes = plt.subplots(1, 3, figsize=(9, 3), sharex=True, sharey=True,
                             subplot_kw={'adjustable': 'box-forced'})
 
-    #fig, axes = plt.subplots(1, 1, figsize=(9, 3), sharex=True, sharey=True,
-    #                         subplot_kw={'adjustable': 'box-forced'})
     ax = axes.ravel()
     for idx, (blobs, color, title) in enumerate(sequence):
         ax[idx].set_title(title)
@@ -144,7 +170,10 @@ def save_plot(blobs_list, image_file, image):
 
 def find_segmentation_images_folder():
     """
+    Precondition: the segmentation_images exists.
     Return the segmentation_images folder.
+
+    @return the segmentation_images folder.
     """
     cwd = os.getcwd()
     os.chdir("../segmentation_images")
