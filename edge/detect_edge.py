@@ -25,15 +25,39 @@ def return_input_folder_location():
         return input_dir
 
 def create_intermediate_folder():
+    """
+    Create a intermediate folder in the current working directory if none
+    exists and return it.
+
+    @return String
+    """
     cwd = os.getcwd()
     mid_dir = cwd + "/mid"
     if not os.path.exists(mid_dir):
         os.makedirs(mid_dir)
+    return mid_dir
 
-def detect_edges(input_dir, method=6, sigma=2):
+def create_output_edge_image_folder(image_list, output_dir):
+    # Make output directory
+    new_image_dir = output_dir
+    for image in image_list:
+        new_image_dir = output_dir + "/" + image.split(".")[0]
+        if not os.path.exists(new_image_dir):
+            os.mkdir(new_image_dir)
+
+def create_edge_images_folder():
+    cwd = os.getcwd()
+    os.chdir("..")
+    parent_folder = os.getcwd()
+    os.chdir(cwd)
+    if not os.path.exists(parent_folder + "/edge_images"):
+        os.mkdir(parent_folder + "/edge_images")
+    return parent_folder + "/edge_images"
+
+def detect_edges(input_dir, mid_dir, method=6, sigma=2):
     """
-    Detect edges using an edge detection method.
-    The default method is prewitt.
+    Detect edges using an edge detection method and save it to the intermediate
+    folder. The default method is prewitt.
 
     1. Default skimage Canny
     2. Canny w/ sigma=2
@@ -51,6 +75,7 @@ def detect_edges(input_dir, method=6, sigma=2):
     images = os.listdir(input_dir)
 
     def edge_method(method_num, im, sigma=2):
+        print("reached")
         return {
             1:feature.canny(im),
             2:feature.canny(im, sigma=2),
@@ -58,16 +83,21 @@ def detect_edges(input_dir, method=6, sigma=2):
             4:sobel(im),
             5:scharr(im),
             6:prewitt(im)
-        }
+        }[method_num]
+
+    edge_images_folder = create_edge_images_folder()
+    create_output_edge_image_folder(images,edge_images_folder)
 
     for image in images:
         image_name = image.split(".")[0]
         im = rgb2gray(io.imread(input_dir + "/" + image))
-
-        if method is int and 1 <= method <=6:
-            scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edge_method(6,im,sigma))
+        print(isinstance(method, int))
+        if isinstance(method, int) and 1 <= method <=6:
+            edge_im = edge_method(6,im,sigma)
+            scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edge_im)
+            scipy.misc.imsave(edge_images_folder + "/" + image_name + "/" + image_name + '.png', edge_im)
 
 if __name__ == "__main__":
-    create_intermediate_folder()
+    intermediate_folder = create_intermediate_folder()
     input_folder_location = return_input_folder_location()
-    detect_edges(input_folder_location)
+    detect_edges(input_folder_location, intermediate_folder)
