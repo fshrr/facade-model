@@ -10,21 +10,18 @@ import os
 
 def return_input_folder_location():
     """
-    Return the input folder location. If "input_images" does not exist in the
-    parent folder of the edge folder, then ask the user for an input folder.
-    Else, return the input folder absolute path of the input_images folder.
+    Return the absolute path of the input_images folder.
 
     @return the input_images path
     """
+
+    cwd = os.getcwd()
     os.chdir("..")
     input_dir = os.getcwd() + "/input_images"
-    if not os.path.exists(input_dir):
-        input_dir = os.filedialog.askfilenamedirectory()
-        return input_dir
-    else:
-        os.chdir("input_images")
-        input_dir = os.getcwd()
-        return input_dir
+    os.chdir(input_dir)
+    input_dir = os.getcwd()
+    os.chdir(cwd)
+    return input_dir
 
 def create_intermediate_folder():
     """
@@ -109,7 +106,22 @@ def detect_edges(input_dir, mid_dir, method=6, sigma=2):
             scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edge_im)
             scipy.misc.imsave(edge_images_folder + "/" + image_name + "/" + image_name + '.png', edge_im)
 
-if __name__ == "__main__":
+def main():
+    """
+    Run the main script.
+
+    If the script is run from a folder the facade-model directory, cd there
+    before running.
+
+    """
+
+    os.chdir(os.getcwd() + "/edge")
+
     intermediate_folder = create_intermediate_folder()
     input_folder_location = return_input_folder_location()
     detect_edges(input_folder_location, intermediate_folder)
+
+    os.chdir("..")
+
+if __name__ == "__main__":
+    main()

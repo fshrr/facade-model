@@ -302,8 +302,13 @@ def find_image_points_folder():
     os.chdir(cwd)
     return image_points_folder
 
-if __name__ == "__main__":
-    # Hyperparameters
+def main(min_ignore=0.0, max_ignore=255.0):
+    """
+    Run the main script.
+    """
+
+    os.chdir(os.getcwd() + "/floodfill")
+
     input_folder = find_edge_images_folder()
     points_folder = find_image_points_folder()
     output_folder = os.getcwd() + "/out"
@@ -315,3 +320,8 @@ if __name__ == "__main__":
 
     # list of directories where images are stored
     process_all_images_of_in_folder(input_folder, output_folder, points_folder, min_ignore=0.0, max_ignore=255.0)
+
+    os.chdir("..")
+
+if __name__ == "__main__":
+    main()
