@@ -204,19 +204,4 @@ def main(w_ratio=0.05, l_ratio=0.05, dev=0.25, thr=0.075):
     os.chdir("..")
 
 if __name__ == "__main__":
-
-    # Hyperparameters
-    """
-    input_folder = find_segmentation_images_folder()
-    output_folder = os.getcwd() + "/out"
-
-    # Default ranges of window sizes (hyperparameters)
-    w_ratio = 0.05
-    l_ratio = 0.05
-    dev = 0.25 #average deviance ratio of radius
-    thr = 0.075
-
-    create_out_folder_cwd()
-    process_all_images_of_in_folder(input_folder, output_folder, w_ratio, l_ratio, dev, thr)
-    """
     main()

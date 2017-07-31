@@ -106,7 +106,7 @@ def detect_edges(input_dir, mid_dir, method=6, sigma=2):
             scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edge_im)
             scipy.misc.imsave(edge_images_folder + "/" + image_name + "/" + image_name + '.png', edge_im)
 
-def main():
+def main(method=6, sigma=2):
     """
     Run the main script.
 
@@ -119,7 +119,7 @@ def main():
 
     intermediate_folder = create_intermediate_folder()
     input_folder_location = return_input_folder_location()
-    detect_edges(input_folder_location, intermediate_folder)
+    detect_edges(input_folder_location, intermediate_folder, method, sigma)
 
     os.chdir("..")
 
