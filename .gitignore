@@ -5,3 +5,4 @@ CMP_facades
 *.mat*
 kittiSeg/RUNS/*
 kittiSeg/DATA/weights/*
+kittiSeg/data/data_road/

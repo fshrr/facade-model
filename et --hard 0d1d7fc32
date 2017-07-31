@@ -1,0 +1,229 @@
+[33mcommit 9dde32f5b8c96030f38d57ff75b6de0b82e734b0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 14:32:46 2017 -0400
+
+    removed data folder
+
+[33mcommit 4b4a485572df7f41c1d297daf13a1c294e4d62bc[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 14:29:53 2017 -0400
+
+    edited data folder structure
+
+[33mcommit 3d12de1b1cdf80272f24a7a800e5f22b89804a35[m
+Merge: 291a438 fdf4b24
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 14:22:38 2017 -0400
+
+    Merge branch 'master' of https://github.com/protoxpire0/facade-model
+
+[33mcommit 291a438cbdd53466cdea4bcf801ef2af1110dc55[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 14:22:19 2017 -0400
+
+    edited data folder structure
+
+[33mcommit fdf4b24d98a8a02e0ecc874289655ef3b194d7a3[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: 8573d97 21d2740
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 12:00:31 2017 -0400
+
+    added approximate polygon and vectorization
+
+[33mcommit 21d2740437bcb410932b2edeb515cbec106450e8[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 11:52:07 2017 -0400
+
+    added kittiseg code
+
+[33mcommit cdac816b44646731971a299a953b744f9c611bf6[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 11:43:35 2017 -0400
+
+    added kittiseg code
+
+[33mcommit 8573d97dd1c326eba22b2da7533d91838557404f[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jul 31 10:39:58 2017 -0400
+
+    added approximate polygon and vectorization
+
+[33mcommit 71eab5e625bcf2c7c2fb3d9b268b73cf5ae1a4cd[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Mon Jul 31 05:48:20 2017 -0400
+
+    Added GUI
+
+[33mcommit 439748b79f12a1554f08f67249c3ab0fdbe1e50b[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Mon Jul 31 00:54:14 2017 -0400
+
+    changed import skimage statement
+
+[33mcommit d29af64de72a067b26c1dd184409ed04102b139e[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Sun Jul 30 00:47:03 2017 -0400
+
+    testing only dreamgrayscale
+
+[33mcommit 1c9fb547b0f4f9f68435f59cc4796709b9257ba4[m
+Author: Pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 05:12:56 2017 -0400
+
+    Update README.md
+
+[33mcommit 70e7e7df656e7d8326caef381f697385524365a2[m
+Author: Pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 05:12:43 2017 -0400
+
+    Update README.md
+
+[33mcommit 780adcec033e941b762202eecfed6d631f557dfd[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 04:45:30 2017 -0400
+
+    updated README
+
+[33mcommit a77e521c815b2e9c87e052d6578596a66d74dc88[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 04:35:23 2017 -0400
+
+    added docs to scripts
+
+[33mcommit 9a01dc564c3feedec8e35b25a18d65eaa55229f0[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 03:42:51 2017 -0400
+
+    Changed README and fixed floodfill minor bug
+
+[33mcommit 723a483cf0536c1cb599c0734854b83554fc20f0[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 03:32:48 2017 -0400
+
+    connected folders together by creating them in the facade-model directory
+
+[33mcommit 813a78e3a6cd8085b9902eead5fa2da208725eac[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 28 01:02:15 2017 -0400
+
+    refactored detect_edge
+
+[33mcommit 23d20ddefd900b4242721fee71e52b65fb96de87[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Wed Jul 26 16:19:31 2017 -0400
+
+    added outputs from floodfill
+
+[33mcommit 19648c95f71e35dae28c4e9103a3d7a1492ca93a[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Wed Jul 26 06:56:43 2017 -0400
+
+    fixed many bugs and updated to be more fluid
+
+[33mcommit f891b251db109b54568bce5ee9e21a3956b91cdd[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Tue Jul 25 00:35:52 2017 -0400
+
+    Added the flood filling algorithm
+
+[33mcommit c9f75e4eb507b5bad7359ebacf48ccaf4a734e04[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Wed Jul 19 19:34:07 2017 -0400
+
+    added new dataset
+
+[33mcommit 64345e99f84b9ba07a75253bb54bfa5079a607bc[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Wed Jul 19 16:23:14 2017 -0400
+
+    changed mid folder to hold prewitt edges
+
+[33mcommit 97bbc96e3a37c3f56e1d8be220a4bffb6505d341[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Wed Jul 19 16:13:08 2017 -0400
+
+    Added Dream edge images
+
+[33mcommit 4ebfacf12c73372df7e570622dbb44ae4b93dd52[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Wed Jul 19 04:19:02 2017 -0400
+
+    added some kitti results
+
+[33mcommit f22f721e5acb0da2c3f0c5955016194bc5a7d296[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Wed Jul 19 04:00:07 2017 -0400
+
+    added test images for cnn
+
+[33mcommit cb3736ae5bde0c4803cdb7a9162395f07b062ac4[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Tue Jul 18 00:06:42 2017 -0400
+
+    combined window and door classes
+
+[33mcommit af41777790ac3fce0fbc78e7fcc65ce236b7c6e3[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Sun Jul 16 17:58:02 2017 -0400
+
+    CMP_facades
+
+[33mcommit a0e58f114d73075d58ee3d9c20b504ced7fa5b81[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Fri Jul 14 20:36:40 2017 -0400
+
+    made a modified dataset of only window and non-window classes
+
+[33mcommit 4c8c15d34213cb2b165103670942b834c55e946b[m
+Author: pineapplebun <kevinjr.chen1@gmail.com>
+Date:   Sun Jul 9 20:28:34 2017 -0400
+
+    Edge and blob detection, rhino scripts
+
+[33mcommit e6d824b522acfc37ea6ecc291a27811ae1fa6d61[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jun 12 14:21:48 2017 -0400
+
+    Tests run with 0.1 fedge
+
+[33mcommit 192fc03b88dc32e1fe5bb76dcdf44d96a8a47855[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jun 12 12:48:09 2017 -0400
+
+    test results with one color seg masks
+
+[33mcommit b1f52287b80cc9f851a9b90d909e6ac933d181fb[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jun 12 04:50:00 2017 -0400
+
+    new one color and three color seg mask for 1047.1048 and one color seg mask for 56.57
+
+[33mcommit 91082e7d1f8213df0f1f2392ede75b35176ff909[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Mon Jun 12 04:18:39 2017 -0400
+
+    first test with in4 from DPST
+
+[33mcommit b1785271a83d4666b44d74c31578744788f712a2[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Sun Jun 11 20:32:48 2017 -0400
+
+    removed old results and cleared log
+
+[33mcommit f9286bcf84baa650de4e78a4e637dac203db3c16[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Sun Jun 11 20:31:44 2017 -0400
+
+    modified deepmatt to take a param for laplacian, modified run.py to accept different id for laplacian and output
+
+[33mcommit 2b29f445226487a08015c4b8b7b1a8c5c5c517dc[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Sun Jun 11 06:07:16 2017 -0400
+
+    one script to rule them all
+
+[33mcommit 95b0861c754e468e313e8f29382722b4263d98d1[m
+Author: protoxpire0 <fahim.shahreer95@gmail.com>
+Date:   Sun Jun 11 03:56:02 2017 -0400
+
+    renewed repo
