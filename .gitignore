@@ -3,3 +3,5 @@ Input_Laplacian*
 CMP_facades
 *floyd*
 *.mat*
+kittiSeg/RUNS/*
+kittiSeg/DATA/weights/*
