@@ -62,7 +62,7 @@ def find_images(image_directory):
 def process_all_images(image_list, img_dir, output_dir, w_ratio=0.05, l_ratio=0.05, dev=0.25, thr=0.075):
     """
     Saves a list of x,y,radius points in a text file in the current directory
-    /out/locations, ../floodfill/points and ../image_points folders.
+    /out/locations and ../image_points folders.
 
     NOTE THAT IMAGES with "_raw" WILL BE REMOVED!
 
@@ -99,17 +99,8 @@ def process_all_images(image_list, img_dir, output_dir, w_ratio=0.05, l_ratio=0.
             for blob in blobs_log:
                 file.write(str(blob[0]) + " " + str(blob[1]) + " " + str(blob[2]) + "\n")
 
-        # copy to floodfill
-        #
-        os.chdir("../floodfill/points")
-        floodfill_points_folder = os.getcwd()
-        os.chdir("../../blob")
-
         name_without_png = image_file.split(".png")[0]
         name_without_raw = name_without_png.split("_raw")[0]
-        with open(floodfill_points_folder + "/" + name_without_raw + ".txt", "w") as file:
-            for blob in blobs_log:
-                file.write(str(blob[0]) + " " + str(blob[1]) + " " + str(blob[2]) + "\n")
 
         with open(image_points_folder + "/" + name_without_raw + ".txt", "w") as file:
             for blob in blobs_log:
