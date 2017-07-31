@@ -1,4 +1,6 @@
 from skimage import io
+from skimage.measure import find_contours, approximate_polygon, subdivide_polygon
+import svgwrite
 import os
 import numpy as np
 import re
@@ -104,8 +106,8 @@ def floodfill(nest_list, selection_list, x, y, min_ignore=0, max_ignore=255):
             queue.enqueue((a-1, b))
             checklist_array[(a-1,b)] = 1
 
-        print(str(a) + "," + str(b))
-        print("The queue size is: " + str(queue.size()))
+        # print(str(a) + "," + str(b))
+        # print("The queue size is: " + str(queue.size()))
        # time.sleep(5)
        # print(selection_list)
 
@@ -186,6 +188,39 @@ def select_object(image_file, x, y, min_ignore=0, max_ignore=255):
     #print(np.nonzero(mask))
     return mask
 
+def approx_polygon(new_object):
+    """
+    Uses scikitimage approximate_polygon function to approximate polygons
+    from a mask from floodfill output
+
+    @parms new_object output mask from floodfill
+    """
+    contour = find_contours(new_object, 0)[0]
+    approx_polygon_coords = approximate_polygon(contour, tolerance=1)
+    # approx_polygon_coords = subdivide_polygon(contour, degree=1, preserve_ends=True)
+    return (approx_polygon_coords)
+
+def coords_to_vector(out_vector_object, coords):
+    """
+    Takes output coordinates from approximated polygons and creates
+    vector polygons in svg format using svgwrite.
+
+    @params out_vector_object vector object name
+    @params coords coordinates returned from approxamated polgyons
+    """
+    # approx_polygon_mask = np.zeros((shape[0], shape[1]), dtype=int)
+    # for i in coords:
+    #     approx_polygon_mask[int(i[0]), int(i[1])] = 255
+    polygon_vector_points = []
+    for i in coords:
+        polygon_vector_points.append((int(i[0]), int(i[1])))
+    # print(polygon_vector_points)
+    out_vector_object = svgwrite.Drawing("test.svg", profile="full")
+    print("creating out_vector_object")
+    out_vector_object.add(out_vector_object.polygon(points = polygon_vector_points, stroke="rgb(0,0,0)"))
+    out_vector_object.save()
+    return None
+
 def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255):
     """
     Selects every object in the image_file based on its points_list and sums
@@ -200,16 +235,20 @@ def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255):
     """
     im_array = io.imread(image_file)
     mask = np.zeros((im_array.shape[0], im_array.shape[1]), dtype=int)
-    print(mask.shape)
+    # print(mask.shape)
     for points in points_list:
         # Note that the points are (y,x)
 
         new_object =  select_object(image_file, int(float(points[1])), int(float(points[0])), min_ignore=0, max_ignore=255)
+
+        approx_polygon_coords = approx_polygon(new_object)
+        approx_polygon_new_object = coords_to_vector("adfdsa", approx_polygon_coords)
+
         mask = mask + new_object
-        print ("new object")
-        print (new_object)
-        print ("maask here")
-        print(mask)
+        # print ("new object")
+        # print (new_object)
+        # print ("maask here")
+        # print(mask)
     #print(np.nonzero(mask))
     mask[mask>1] = 255
     print(mask)
