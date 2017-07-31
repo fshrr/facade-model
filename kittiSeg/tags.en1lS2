@@ -1,0 +1,104 @@
+absolute_import	download_data.py	/^from __future__ import absolute_import$/;"	i
+division	download_data.py	/^from __future__ import division$/;"	i
+print_function	download_data.py	/^from __future__ import print_function$/;"	i
+logging	download_data.py	/^import logging$/;"	i
+sys	download_data.py	/^import sys$/;"	i
+os	download_data.py	/^import os$/;"	i
+subprocess	download_data.py	/^import subprocess$/;"	i
+zipfile	download_data.py	/^import zipfile$/;"	i
+urllib	download_data.py	/^from six.moves import urllib$/;"	i
+copy2	download_data.py	/^from shutil import copy2$/;"	i
+argparse	download_data.py	/^import argparse$/;"	i
+level	download_data.py	/^                    level=logging.INFO,$/;"	v
+stream	download_data.py	/^                    stream=sys.stdout)$/;"	v
+vgg_url	download_data.py	/^vgg_url = 'ftp:\/\/mi.eng.cam.ac.uk\/pub\/mttt2\/models\/vgg16.npy'$/;"	v
+get_pathes	download_data.py	/^def get_pathes():$/;"	f
+download	download_data.py	/^def download(url, dest_directory):$/;"	f
+_progress	download_data.py	/^    def _progress(count, block_size, total_size):$/;"	f	function:download
+main	download_data.py	/^def main():$/;"	f
+absolute_import	evaluate.py	/^from __future__ import absolute_import$/;"	i
+division	evaluate.py	/^from __future__ import division$/;"	i
+print_function	evaluate.py	/^from __future__ import print_function$/;"	i
+json	evaluate.py	/^import json$/;"	i
+logging	evaluate.py	/^import logging$/;"	i
+os	evaluate.py	/^import os$/;"	i
+sys	evaluate.py	/^import sys$/;"	i
+collections	evaluate.py	/^import collections$/;"	i
+np	evaluate.py	/^import numpy as np$/;"	i
+tf	evaluate.py	/^import tensorflow as tf$/;"	i
+flags	evaluate.py	/^flags = tf.app.flags$/;"	v
+FLAGS	evaluate.py	/^FLAGS = flags.FLAGS$/;"	v
+tensorvision	evaluate.py	/^import tensorvision.train as train$/;"	i
+train	evaluate.py	/^import tensorvision.train as train$/;"	i
+tensorvision	evaluate.py	/^import tensorvision.analyze as ana$/;"	i
+ana	evaluate.py	/^import tensorvision.analyze as ana$/;"	i
+tensorvision	evaluate.py	/^import tensorvision.utils as utils$/;"	i
+utils	evaluate.py	/^import tensorvision.utils as utils$/;"	i
+kitti_test	evaluate.py	/^from evaluation import kitti_test$/;"	i
+segmentation_weights_url	evaluate.py	/^segmentation_weights_url = ("ftp:\/\/mi.eng.cam.ac.uk\/"$/;"	v
+maybe_download_and_extract	evaluate.py	/^def maybe_download_and_extract(runs_dir):$/;"	f
+zipfile	evaluate.py	/^    import zipfile$/;"	i
+main	evaluate.py	/^def main(_):$/;"	f
+tensorvision	evaluate.py	/^        import tensorvision.train$/;"	i
+train	evaluate.py	/^        import tensorvision.train$/;"	i
+tensorflow_fcn	evaluate.py	/^        import tensorflow_fcn.utils$/;"	i
+utils	evaluate.py	/^        import tensorflow_fcn.utils$/;"	i
+the	evaluate.py	/^        logging.error("Could not import the submodules.")$/;"	i
+submodules	evaluate.py	/^        logging.error("Could not import the submodules.")$/;"	i
+absolute_import	train.py	/^from __future__ import absolute_import$/;"	i
+division	train.py	/^from __future__ import division$/;"	i
+print_function	train.py	/^from __future__ import print_function$/;"	i
+tf	train.py	/^import tensorflow as tf$/;"	i
+commentjson	train.py	/^import commentjson$/;"	i
+logging	train.py	/^import logging$/;"	i
+os	train.py	/^import os$/;"	i
+sys	train.py	/^import sys$/;"	i
+collections	train.py	/^import collections$/;"	i
+dict_merge	train.py	/^def dict_merge(dct, merge_dct):$/;"	f
+level	train.py	/^                        level=logging.INFO,$/;"	v
+stream	train.py	/^                        stream=sys.stdout)$/;"	v
+np	train.py	/^import numpy as np$/;"	i
+flags	train.py	/^flags = tf.app.flags$/;"	v
+FLAGS	train.py	/^FLAGS = flags.FLAGS$/;"	v
+tensorvision	train.py	/^import tensorvision.train as train$/;"	i
+train	train.py	/^import tensorvision.train as train$/;"	i
+tensorvision	train.py	/^import tensorvision.utils as utils$/;"	i
+utils	train.py	/^import tensorvision.utils as utils$/;"	i
+main	train.py	/^def main(_):$/;"	f
+tensorvision	train.py	/^        import tensorvision.train$/;"	i
+train	train.py	/^        import tensorvision.train$/;"	i
+tensorflow_fcn	train.py	/^        import tensorflow_fcn.utils$/;"	i
+utils	train.py	/^        import tensorflow_fcn.utils$/;"	i
+the	train.py	/^        logging.error("Could not import the submodules.")$/;"	i
+submodules	train.py	/^        logging.error("Could not import the submodules.")$/;"	i
+ast	train.py	/^        import ast$/;"	i
+absolute_import	demo.py	/^from __future__ import absolute_import$/;"	i
+division	demo.py	/^from __future__ import division$/;"	i
+print_function	demo.py	/^from __future__ import print_function$/;"	i
+json	demo.py	/^import json$/;"	i
+logging	demo.py	/^import logging$/;"	i
+os	demo.py	/^import os$/;"	i
+sys	demo.py	/^import sys$/;"	i
+collections	demo.py	/^import collections$/;"	i
+level	demo.py	/^                    level=logging.INFO,$/;"	v
+stream	demo.py	/^                    stream=sys.stdout)$/;"	v
+np	demo.py	/^import numpy as np$/;"	i
+scp	demo.py	/^import scipy as scp$/;"	i
+scipy	demo.py	/^import scipy.misc$/;"	i
+misc	demo.py	/^import scipy.misc$/;"	i
+tf	demo.py	/^import tensorflow as tf$/;"	i
+flags	demo.py	/^flags = tf.app.flags$/;"	v
+FLAGS	demo.py	/^FLAGS = flags.FLAGS$/;"	v
+seg	demo.py	/^from seg_utils import seg_utils as seg$/;"	i
+tensorvision	demo.py	/^    import tensorvision.utils as tv_utils$/;"	i
+tv_utils	demo.py	/^    import tensorvision.utils as tv_utils$/;"	i
+tensorvision	demo.py	/^    import tensorvision.core as core$/;"	i
+core	demo.py	/^    import tensorvision.core as core$/;"	i
+the	demo.py	/^    logging.error("Could not import the submodules.")$/;"	i
+submodules	demo.py	/^    logging.error("Could not import the submodules.")$/;"	i
+default_run	demo.py	/^default_run = 'KittiSeg_pretrained'$/;"	v
+weights_url	demo.py	/^weights_url = ("ftp:\/\/mi.eng.cam.ac.uk\/pub\/mttt2\/models\/KittiSeg_pretrained.zip")$/;"	v
+maybe_download_and_extract	demo.py	/^def maybe_download_and_extract(runs_dir):$/;"	f
+zipfile	demo.py	/^    import zipfile$/;"	i
+resize_label_image	demo.py	/^def resize_label_image(image, gt_image, image_height, image_width):$/;"	f
+main	demo.py	/^def main(_):$/;"	f
