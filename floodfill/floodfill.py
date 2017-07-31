@@ -191,14 +191,24 @@ def select_object(image_file, x, y, min_ignore=0, max_ignore=255):
 def approx_polygon(new_object):
     """
     Uses scikitimage approximate_polygon function to approximate polygons
-    from a mask from floodfill output
+    from a mask of floodfill output
 
     @parms new_object output mask from floodfill
     """
     contour = find_contours(new_object, 0)[0]
     approx_polygon_coords = approximate_polygon(contour, tolerance=1)
-    # approx_polygon_coords = subdivide_polygon(contour, degree=1, preserve_ends=True)
     return (approx_polygon_coords)
+
+def subd_polygon(new_object):
+    """
+    Uses scikitimage approximate_polygon function to subdivide polygons
+    from a mask of floodfill output
+
+    @parms new_object output mask from floodfill
+    """
+    contour = find_contours(new_object, 0)[0]
+    subd_polygon_coords = subdivide_polygon(contour, degree=1, preserve_ends=True)
+    return (subd_polygon_coords)
 
 def coords_to_vector(out_vector_object, coords):
     """
@@ -208,14 +218,11 @@ def coords_to_vector(out_vector_object, coords):
     @params out_vector_object vector object name
     @params coords coordinates returned from approxamated polgyons
     """
-    # approx_polygon_mask = np.zeros((shape[0], shape[1]), dtype=int)
-    # for i in coords:
-    #     approx_polygon_mask[int(i[0]), int(i[1])] = 255
+
     polygon_vector_points = []
     for i in coords:
         polygon_vector_points.append((int(i[0]), int(i[1])))
-    # print(polygon_vector_points)
-    out_vector_object = svgwrite.Drawing("test.svg", profile="full")
+
     print("creating out_vector_object")
     out_vector_object.add(out_vector_object.polygon(points = polygon_vector_points, stroke="rgb(0,0,0)"))
     out_vector_object.save()
@@ -234,15 +241,34 @@ def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255):
     @return the mask that contains all the objects in an image
     """
     im_array = io.imread(image_file)
+
     mask = np.zeros((im_array.shape[0], im_array.shape[1]), dtype=int)
+
+    # Finding the output folder for vectors
+    output_vectors_folder = find_output_vectors_folder()
+
+    # Creating paths for saving two types of output vector file
+    image_name = image_file.split(".png")[0]
+    out_approx_vector_file = output_vectors_folder + "/" + image_name + "/" + image_name + "_approx.svg"
+    out_subd_vector_file = output_vectors_folder + "/" + image_name + "/" + image_name + "_subd.svg"
+
+    # Creating vector objects with svgwrite
+    out_approx_vector_object = svgwrite.Drawing(out_approx_vector_file, profile="full")
+    out_subd_vector_object = svgwrite.Drawing(out_subd_vector_file, profile="full")
+
     # print(mask.shape)
     for points in points_list:
         # Note that the points are (y,x)
 
         new_object =  select_object(image_file, int(float(points[1])), int(float(points[0])), min_ignore=0, max_ignore=255)
 
+
         approx_polygon_coords = approx_polygon(new_object)
-        approx_polygon_new_object = coords_to_vector("adfdsa", approx_polygon_coords)
+        subd_polygon_coords = subd_polygon(new_object)
+
+        # adding one polygon vector to vector objects: out_approx_vector_object and out_subd_vector_object
+        coords_to_vector(out_approx_vector_object, approx_polygon_coords)
+        coords_to_vector(out_subd_vector_object, subd_polygon_coords)
 
         mask = mask + new_object
         # print ("new object")
@@ -250,6 +276,11 @@ def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255):
         # print ("maask here")
         # print(mask)
     #print(np.nonzero(mask))
+
+    # saving out_approx_vector_object and out_subd_vector_object after all polygons are added
+    out_approx_vector_object.save()
+    out_subd_vector_object.save()
+
     mask[mask>1] = 255
     print(mask)
     return mask
@@ -326,10 +357,24 @@ def find_output_shapes_folder():
     Return the output_shapes folder.
     """
     cwd = os.getcwd()
+    if not os.path.exists("../output_shapes"):
+        os.mkdir("../output_shapes")
     os.chdir("../output_shapes")
     output_shapes_folder = os.getcwd()
     os.chdir(cwd)
     return output_shapes_folder
+
+def find_output_vectors_folder():
+    """
+    Return the output_vectors folder.
+    """
+    cwd = os.getcwd()
+    if not os.path.exists("../output_vectors"):
+        os.mkdir("../output_vectors")
+    os.chdir("../output_vectors")
+    output_vectors_folder = os.getcwd()
+    os.chdir(cwd)
+    return output_vectors_folder
 
 def find_image_points_folder():
     """
