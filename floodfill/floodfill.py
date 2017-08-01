@@ -231,12 +231,12 @@ def coords_to_vector(out_vector_object, coords):
     for i in coords:
         polygon_vector_points.append((int(i[0]), int(i[1])))
 
-    print("creating out_vector_object")
+    #print("creating out_vector_object")
     out_vector_object.add(out_vector_object.polygon(points = polygon_vector_points, stroke="rgb(0,0,0)"))
     out_vector_object.save()
     return None
 
-def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255, max_width_flood=0.25, max_length_flood=0.25):
+def select_all_objects(image_file, image_name, points_list, min_ignore=0, max_ignore=255, max_width_flood=0.25, max_length_flood=0.25):
     """
     Selects every object in the image_file based on its points_list and sums
     it into one image. Return all object masks as one mask.
@@ -255,10 +255,16 @@ def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255, ma
     # Finding the output folder for vectors
     output_vectors_folder = find_output_vectors_folder()
 
+    folder_list = os.listdir(output_vectors_folder)
+
+    folder_to_save_in = output_vectors_folder
+    for folder in folder_list:
+        if image_name.startswith(folder):
+            folder_to_save_in = output_vectors_folder + "/" + folder
+
     # Creating paths for saving two types of output vector file
-    image_name = image_file.split(".png")[0]
-    out_approx_vector_file = output_vectors_folder + "/" + image_name + "/" + image_name + "_approx.svg"
-    out_subd_vector_file = output_vectors_folder + "/" + image_name + "/" + image_name + "_subd.svg"
+    out_approx_vector_file = folder_to_save_in + "/" + image_name + "_approx.svg"
+    out_subd_vector_file = folder_to_save_in + "/" + image_name + "_subd.svg"
 
     # Creating vector objects with svgwrite
     out_approx_vector_object = svgwrite.Drawing(out_approx_vector_file, profile="full")
@@ -290,7 +296,7 @@ def select_all_objects(image_file, points_list, min_ignore=0, max_ignore=255, ma
     out_subd_vector_object.save()
 
     mask[mask>1] = 255
-    print(mask)
+    #print(mask)
     return mask
 
 def process_all_images(image_list, img_dir, output_dir, points_folder, min_ignore=0, max_ignore=255, max_width_flood=0.25, max_length_flood=0.25):
@@ -308,12 +314,13 @@ def process_all_images(image_list, img_dir, output_dir, points_folder, min_ignor
     dict_of_selection_masks = {}
 
     for image_file in image_list:
+        image_name = image_file.split(".png")[0]
         img_loc = img_dir + "/" + image_file
         img_points_list = import_points_for_image(image_file.split(".png")[0], points_folder)
-        img_mask = select_all_objects(img_loc, img_points_list, min_ignore, max_ignore, max_width_flood, max_length_flood)
+        img_mask = select_all_objects(img_loc, image_name, img_points_list, min_ignore, max_ignore, max_width_flood, max_length_flood)
         dict_of_selection_masks[image_file] = img_mask
 
-        image_name = image_file.split(".png")[0]
+
 
         output_dir_list = os.listdir(output_dir)
         for folder_name in output_dir_list:
@@ -409,6 +416,7 @@ def main(min_ignore=0.0, max_ignore=255.0, max_width_flood=0.25, max_length_floo
     create_out_folder()
     create_image_folders_in_out(input_folder, output_folder)
     create_image_folders_in_out(input_folder, output_shapes_folder)
+    create_image_folders_in_out(input_folder, find_output_vectors_folder())
 
     # list of directories where images are stored
     process_all_images_of_in_folder(input_folder, output_folder, points_folder,

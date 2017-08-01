@@ -14,16 +14,17 @@ def run_app(app_win_width=0.05, app_win_length=0.05, min_ignore=0.0, max_ignore=
 
 
     # run edge detection
-    #detect_edge.main(edge_num, canny_sigma)
-    #print("end of edge script!" + os.getcwd())
+    detect_edge.main(edge_num, canny_sigma)
+    print("end of edge script!" + os.getcwd())
 
     # run thresholding: there are some hyperparameters for thresholding here too
-    #threshold.main()
+    threshold.main()
+    print("end of threshold script!" + os.getcwd())
 
     # run blob detection
 
-    #detect_blob.main(app_win_width, app_win_length, norm_dev_blob, thr_blob)
-    #print("end of blob script!" + os.getcwd())
+    detect_blob.main(app_win_width, app_win_length, norm_dev_blob, thr_blob)
+    print("end of blob script!" + os.getcwd())
 
     # run floodfill (and convex hull / approximate polygon)
 
