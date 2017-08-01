@@ -100,8 +100,9 @@ def detect_edges(input_dir, mid_dir, method=6, sigma=2):
     for image in images:
         image_name = image.split(".")[0]
         im = rgb2gray(io.imread(input_dir + "/" + image))
-        print(isinstance(method, int))
-        if isinstance(method, int) and 1 <= method <=6:
+        print("Is the edge number a number?")
+        print(isinstance(method, int) or (isinstance(method, float))
+        if (isinstance(method, int) or (isinstance(method, float)) and 1 <= method <=6:
             edge_im = edge_method(6,im,sigma)
             scipy.misc.imsave(mid_dir + "/" + image_name + '.png', edge_im)
             scipy.misc.imsave(edge_images_folder + "/" + image_name + "/" + image_name + '.png', edge_im)

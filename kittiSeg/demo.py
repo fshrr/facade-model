@@ -48,7 +48,7 @@ FLAGS = flags.FLAGS
 
 sys.path.insert(1, 'incl')
 
-from seg_utils import seg_utils as seg
+#from seg_utils import seg_utils as seg
 
 try:
     # Check whether setup was done correctly
@@ -127,6 +127,7 @@ def main(_):
         logdir = FLAGS.logdir
 
     # Loading hyperparameters from logdir
+    #print(logdir + '/hypes')
     hypes = tv_utils.load_hypes_from_logdir(logdir, base_path='hypes')
 
     logging.info("Hypes loaded successfully.")
@@ -178,7 +179,7 @@ def main(_):
     output_image = output[0][:, 1].reshape(shape[0], shape[1])
 
     # Plot confidences as red-blue overlay
-    rb_image = seg.make_overlay(image, output_image)
+    #rb_image = seg.make_overlay(image, output_image)
 
     # Accept all pixel with conf >= 0.5 as positive prediction
     # This creates a `hard` prediction result for class street
@@ -195,18 +196,18 @@ def main(_):
         output_base_name = FLAGS.output_image
 
     raw_image_name = output_base_name.split('.')[0] + '_raw.png'
-    rb_image_name = output_base_name.split('.')[0] + '_rb.png'
+    #rb_image_name = output_base_name.split('.')[0] + '_rb.png'
     green_image_name = output_base_name.split('.')[0] + '_green.png'
 
     scp.misc.imsave(raw_image_name, output_image)
-    scp.misc.imsave(rb_image_name, rb_image)
+    #scp.misc.imsave(rb_image_name, rb_image)
     scp.misc.imsave(green_image_name, green_image)
 
     logging.info("")
     logging.info("Raw output image has been saved to: {}".format(
         os.path.realpath(raw_image_name)))
-    logging.info("Red-Blue overlay of confs have been saved to: {}".format(
-        os.path.realpath(rb_image_name)))
+    #logging.info("Red-Blue overlay of confs have been saved to: {}".format(
+    #    os.path.realpath(rb_image_name)))
     logging.info("Green plot of predictions have been saved to: {}".format(
         os.path.realpath(green_image_name)))
 

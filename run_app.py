@@ -152,5 +152,5 @@ if __name__ == "__main__":
     setup_gui(app)
     # start the GUI
     text = "Window Segmentation and Shape Approximation"
-    app.showSplash(text, fill='white', stripe='black', fg='white', font=44)
+    #app.showSplash(text, fill='white', stripe='black', fg='white', font=44)
     app.go()
