@@ -6,6 +6,10 @@
 2. segmentation_images -> blob detection on segmentation -> image_points
 3. edge_images + image_points -> floodfill + polygon approximation -> output_shapes
 
+# Make image name subdirectories for PNG images in any folder
+
+In terminal, enter: python make_folder_image.py -i <folder path that contains images>
+
 # TODO:
 
 1. polygon approximation scripts
