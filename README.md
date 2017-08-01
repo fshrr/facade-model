@@ -8,7 +8,7 @@
 
 # Make image name subdirectories for PNG images in any folder
 
-In terminal, enter: python make_folder_image.py -i <folder path that contains images>
+In terminal, enter: python make_folder_image.py -i "folder path that contains images"
 
 # TODO:
 
