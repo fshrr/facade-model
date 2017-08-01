@@ -1,4 +1,4 @@
-# Window Segmentation and Polygon Approximation
+# Window Segmentation and Shape Approximation
 
 # Pipeline Structure:
 
@@ -10,18 +10,15 @@
 
 In terminal, enter: python make_folder_image.py -i "folder path that contains images"
 
+# Running the entire process
+
+Add all images that are to be processed into the input_images folder.
+In terminal, run: python run_all.py
+
 # TODO:
 
-1. polygon approximation scripts
+2. KITTISeg to output segmentation images into image folders inside segmentation_images. Not implemented atm.
 
-2. KITTISeg to output segmentation images into image folders inside segmentation_images
+5. Limit floodfill after x,y passes a certain point. Maybe? 
 
-3. run_program.py to start Pipeline
-
-4. settings.txt to read from
-
-5. limit floodfill after x,y passes a certain point
-
-6. python to .exe
-
-7. rhino rasteur image to vector?
+7. Rasteur image to vector? Not working atm.
