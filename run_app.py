@@ -1,28 +1,33 @@
 #from KittiSeg import run_segmentation
 from floodfill import floodfill
-from edge import detect_edge
+from edge import detect_edge, threshold
 from blob import detect_blob
 import os
 from appJar import gui
 import time
 
-def run_app(app_win_width=0.05, app_win_length=0.05, min_ignore=0.0, max_ignore=255.0):
+# docker?
+def run_app(app_win_width=0.05, app_win_length=0.05, min_ignore=0.0, max_ignore=255.0, norm_dev_blob=0.25,
+    thr_blob=0.075, max_width_flood=0.25, max_length_flood=0.25, edge_num=6, canny_sigma=2):
 
     # run segmentation
 
 
     # run edge detection
-    detect_edge.main()
-    print("end of edge script!" + os.getcwd())
+    #detect_edge.main(edge_num, canny_sigma)
+    #print("end of edge script!" + os.getcwd())
+
+    # run thresholding: there are some hyperparameters for thresholding here too
+    #threshold.main()
 
     # run blob detection
 
-    detect_blob.main()
-    print("end of blob script!" + os.getcwd())
+    #detect_blob.main(app_win_width, app_win_length, norm_dev_blob, thr_blob)
+    #print("end of blob script!" + os.getcwd())
 
     # run floodfill (and convex hull / approximate polygon)
 
-    floodfill.main(min_ignore,max_ignore)
+    floodfill.main(min_ignore, max_ignore, max_width_flood, max_length_flood)
     print("end of floodfill script!" + os.getcwd())
 
 # handle button events
@@ -47,7 +52,8 @@ def press(button):
             app.disableButton("Submit")
             # start running the app
 
-            run_app(app_win_width, app_win_length, min_ignore, max_ignore)
+            run_app(app_win_width, app_win_length, min_ignore, max_ignore,
+                norm_dev_blob, thr_blob, max_width_flood, max_length_flood, edge_num, canny_sigma)
 
             #re-enable after app has run
             app.enableButton("Submit")
@@ -141,7 +147,7 @@ def setup_gui(app):
 
 if __name__ == "__main__":
 
-    app = gui("Login Window", "1280x720")
+    app = gui("Login Window", "800x400")
     setup_gui(app)
     # start the GUI
     text = "Window Segmentation and Shape Approximation"

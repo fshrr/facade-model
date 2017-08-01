@@ -14,13 +14,11 @@ def create_out_folder():
 
 def find_input_folder():
     """
+    If you need to find the mid folder starting from edge folder.
     Find the input folder "/mid" in the current working directory and return its
     absolute path.
     """
-    cwd = os.getcwd()
-    input_dir = cwd + "/mid"
-    if not os.path.exists(input_dir):
-        input_dir = os.filedialog.askfilenamedirectory()
+    input_dir = os.getcwd() + "/mid"
     return input_dir
 
 def create_output_image_folder(image_list, output_dir):
@@ -110,13 +108,22 @@ def threshold_image(input_dir, output_dir, above_value, below_value, threshold_l
             picture.save(edge_new_image_dir + "/" + image.split(".")[0] + mod
                      + str(threshold) + ".png", "png")
 
-if __name__ == "__main__":
-    # Hyperparameters
+def main(above_thres_grayscale_value=255, below_thres_grayscale_value=0, thresholds=[10, 20, 30, 40]):
+    """
+    The main method.
 
-    above_thres_grayscale_value = 255 # Define the feature color
-    below_thres_grayscale_value = 0
-    thresholds = [10, 20, 30, 40]
+    @params above_thres_grayscale_value the value of the pixel if above threshold
+    @params below_thres_grayscale_value the value of the pixel if below threshold
+    @params thresholds the threshold values to test
+    """
+
+    os.chdir(os.getcwd() + "/edge")
 
     input_dir = find_input_folder()
     output_dir = create_out_folder()
     threshold_image(input_dir, output_dir, above_thres_grayscale_value, below_thres_grayscale_value, thresholds)
+
+    os.chdir("..")
+
+if __name__ == "__main__":
+    main()
