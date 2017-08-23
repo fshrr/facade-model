@@ -1,5 +1,11 @@
 # Window Segmentation and Shape Approximation From 2D Facade Image
 
+## IMPORTANT NOTES:
+
+1. Currently, run_app.py does not run segmentation on the input images. Thus, the current version requires that the segmentation images of the sme name as the input images be uploaded to the segmentation folder. In order to do segmentation based on the approach by Martin Teichmann et al.'s KITTISeg network requires the user to configure their computer with all the dependencies required of KITTISeg as found here: https://github.com/MarvinTeichmann/KittiSeg . We have put on hold being able to output segmentation images into image folders inside segmentation\_images as KITTISeg's TensorVision requires a nvidia gpu to be able to make segmentations. 
+
+2. Limit floodfill after x,y passes a certain point in order to create window shapes. This works to a certain extent depending on how edge detection outputs the images.
+
 ## Pipeline Structure:
 
 1. input_images -> edge detection and KITTI segmentation -> edge_images + segmentation_images
@@ -45,10 +51,3 @@ Kittiseg window detection is not 100% accurate when segmenting windows from faca
 
 Outputs from both Kittiseg segmentation and floodfill result in blobs of irregular structure, making it more complex and difficult for vectorization. To simplify the window detected regions into more regular polygons, Approximate Polygons and Subdivide Polygons algorithms from Scikit Image are used. This results in polygons around the area of the detected windows where varying tolerance values control the flexibility of the polygon formation around a region. Given that polygon approximation outputs a set of coordinates for polygon vertices, svgwrite is then used to create vectors (in .svg) for each polygon.
 
-## TODO:
-
-2. KITTISeg to output segmentation images into image folders inside segmentation\_images. Not implemented atm.
-
-5. Limit floodfill after x,y passes a certain point. Maybe? 
-
-7. Rasteur image to vector? Not working atm.
